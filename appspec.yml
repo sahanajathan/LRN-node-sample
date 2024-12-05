@@ -1,10 +1,8 @@
 version: 0.0
 os: linux
-
 files:
-  - source: /            # Everything in the root of the archive is copied
-    destination: /opt/codedeploy-agent/deployment-root/
-    overwrite: true
+  - source: /    # Source is your local directory or CodeBuild output directory
+    destination: /home/ec2-user/my-app
 
 hooks:
   BeforeInstall:
