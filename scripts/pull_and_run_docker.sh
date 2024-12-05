@@ -23,4 +23,4 @@ docker rm my-container || true
 
 # Run the new container
 echo "Running the Docker container..."
-docker run -d -p 80:80 --name my-container 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
+docker run -d -p 3000:3000 --name my-container 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
