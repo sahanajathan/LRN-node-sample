@@ -1,16 +1,9 @@
 #!/bin/bash
+echo "Installing Docker..."
+yum update -y
+yum install -y docker
+service docker start
+chkconfig docker on
 
-# Print out commands as they are executed
-set -x
-
-# Install dependencies (example for Node.js app)
-echo "Installing dependencies..."
-cd /opt/codedeploy-agent/deployment-root/$DEPLOYMENT_ID/my-application-files
-npm install --production
-
-# Ensure any other required dependencies are installed, like system packages
-# Example: Installing a system package
-# sudo yum install -y some-package
-
-# Finished installing dependencies
-echo "Dependencies installed successfully!"
+# Optional: Install AWS CLI if not already installed
+yum install -y aws-cli
