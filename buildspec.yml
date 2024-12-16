@@ -1,16 +1,12 @@
 version: 0.2
 
 phases:
-  # Install phase
+  # Install phase (no need for explicit Java installation)
   install:
     runtime-versions:
-      java: openjdk11  # This sets the runtime to OpenJDK 11 by default
+      java: openjdk11  # CodeBuild will use the default OpenJDK 11
     commands:
-      - echo "Installing Amazon Corretto (OpenJDK 11)..."
-      - yum install -y java-11-amazon-corretto-devel   # Correct yum command for Amazon Corretto
-      - export JAVA_HOME="/usr/lib/jvm/java-11-amazon-corretto"  # Set JAVA_HOME to Corretto location
-      - export JDK_HOME=$JAVA_HOME
-      - export PATH=$JAVA_HOME/bin:$PATH
+      - echo "Using OpenJDK 11 runtime"
       - java -version   # Check Java version after installation
       - echo "Installation phase completed."
 
@@ -18,7 +14,7 @@ phases:
   build:
     commands:
       - echo "Starting the build process..."
-      - mvn clean package -DskipTests  # You can remove -DskipTests to run tests
+      - mvn clean package -DskipTests
       - echo "Build completed successfully."
 
   # Post build phase (optional)
@@ -29,10 +25,8 @@ phases:
 
 artifacts:
   files:
-    - target/*.jar   # Specify your artifact location (e.g., JAR files)
-  discard-paths: yes   # Discards directory paths when storing artifacts
+    - target/*.jar
 
-# Cache (optional)
 cache:
   paths:
-    - '/root/.m2/**/*'  # Caches Maven dependencies to speed up builds
+    - '/root/.m2/**/*'
