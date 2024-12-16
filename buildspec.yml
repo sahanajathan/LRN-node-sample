@@ -5,18 +5,22 @@ phases:
   install:
     commands:
       - echo "Installing Amazon Corretto (OpenJDK 11)..."
-      - wget -qO - https://corretto.aws/corretto.key | sudo apt-key add -
+      # Download the Corretto GPG key and add it to trusted keys
+      - wget -qO - https://corretto.aws/corretto.key | sudo tee /etc/apt/trusted.gpg.d/corretto.asc
+      # Add the Corretto repository to the sources list
       - sudo add-apt-repository "deb https://corretto.aws/debian stable main"
       - sudo apt-get update
+      # Install Amazon Corretto OpenJDK 11
       - sudo apt-get install -y java-11-amazon-corretto-jdk
-      - java -version  # Verify the installed Java version
+      # Verify installation
+      - java -version
       - echo "Installation phase completed."
 
   # Build phase
   build:
     commands:
       - echo "Starting the build process..."
-      - mvn clean package -DskipTests  # You can remove -DskipTests to run tests
+      - mvn clean package -DskipTests  # Adjust according to your build process
       - echo "Build completed successfully."
 
   # Post build phase (optional)
@@ -27,7 +31,7 @@ phases:
 
 artifacts:
   files:
-    - target/*.jar   # Specify your artifact location (e.g., JAR files)
+    - target/*.jar  # Specify your artifact location (e.g., JAR files)
   discard-paths: yes   # Discards directory paths when storing artifacts
 
 # Cache (optional)
