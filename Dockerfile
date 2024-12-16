@@ -48,3 +48,5 @@ RUN ./snyk monitor
 # Optionally, you can define the default command to run your app (e.g., if it's a web app, REST API, etc.)
 # CMD ["java", "-jar", "target/your-app.jar"]  # Adjust as necessary for your app 
 
+
+
