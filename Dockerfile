@@ -39,7 +39,7 @@ RUN ./snyk auth $SNYK_TOKEN
 # Run Snyk to test your project for vulnerabilities (fail the build if vulnerabilities are found with medium or higher severity)
 RUN ./snyk test --severity-threshold=medium
 
-# Optionally, upload the vulnerability results to Snyk's dashboard for monitoring
+# Optionally, upload the vulnerability results to Snyk's dashboard for monitoring 
 RUN ./snyk monitor
 
 # Expose the application (if needed, based on your use case)
