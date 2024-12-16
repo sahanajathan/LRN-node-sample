@@ -7,7 +7,7 @@ phases:
       java: openjdk11  # This sets the runtime to OpenJDK 11 by default
     commands:
       - echo "Installing Amazon Corretto (OpenJDK 11)..."
-      - yum install -y java-11-amazon-corretto-devel   # Explicit installation of Corretto
+      - yum install -y java-11-amazon-corretto-devel   # Correct yum command for Amazon Corretto
       - export JAVA_HOME="/usr/lib/jvm/java-11-amazon-corretto"  # Set JAVA_HOME to Corretto location
       - export JDK_HOME=$JAVA_HOME
       - export PATH=$JAVA_HOME/bin:$PATH
