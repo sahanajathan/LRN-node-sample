@@ -4,7 +4,6 @@ phases:
   install:
     runtime-versions:
       java: openjdk11
-
   build:
     commands:
       - echo "Building the project..."
