@@ -1,27 +1,22 @@
 version: 0.2
 
 phases:
-  # Install phase (no need for explicit Java installation)
+ 
   install:
     runtime-versions:
-      java: openjdk11  # CodeBuild will use the default OpenJDK 11
+      java: openjdk11  
     commands:
       - echo "Using OpenJDK 11 runtime"
-      - java -version   # Check Java version after installation
+      - java -version   
       - echo "Installation phase completed."
 
-  # Build phase
+ 
   build:
     commands:
       - echo "Starting the build process..."
       - mvn clean package -DskipTests
       - echo "Build completed successfully."
 
-  # Post build phase (optional)
-  post_build:
-    commands:
-      - echo "Post-build phase started..."
-      - echo "Post-build phase completed."
 
 artifacts:
   files:
