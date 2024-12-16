@@ -1,15 +1,38 @@
 version: 0.2
 
 phases:
+  # Install phase
   install:
+    runtime-versions:
+      java: openjdk11  # This sets the runtime to OpenJDK 11 by default
     commands:
       - echo "Installing Amazon Corretto (OpenJDK 11)..."
-      - yum install -y java-11-amazon-corretto-devel
+      - yum install -y java-11-amazon-corretto-devel   # Explicit installation of Corretto
+      - export JAVA_HOME="/usr/lib/jvm/java-11-amazon-corretto"  # Set JAVA_HOME to Corretto location
+      - export JDK_HOME=$JAVA_HOME
+      - export PATH=$JAVA_HOME/bin:$PATH
+      - java -version   # Check Java version after installation
+      - echo "Installation phase completed."
+
+  # Build phase
   build:
     commands:
-      - echo "Building the project..."
-      - mvn clean package -DskipTests
+      - echo "Starting the build process..."
+      - mvn clean package -DskipTests  # You can remove -DskipTests to run tests
+      - echo "Build completed successfully."
+
+  # Post build phase (optional)
+  post_build:
+    commands:
+      - echo "Post-build phase started..."
+      - echo "Post-build phase completed."
 
 artifacts:
   files:
-    - target/*.jar
+    - target/*.jar   # Specify your artifact location (e.g., JAR files)
+  discard-paths: yes   # Discards directory paths when storing artifacts
+
+# Cache (optional)
+cache:
+  paths:
+    - '/root/.m2/**/*'  # Caches Maven dependencies to speed up builds
