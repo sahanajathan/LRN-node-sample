@@ -1,27 +1,36 @@
 version: 0.2
 
 phases:
- 
+  # Install phase
   install:
-    runtime-versions:
-      java: openjdk11  
     commands:
-      - echo "Using OpenJDK 11 runtime"
-      - java -version   
+      - echo "Installing Amazon Corretto (OpenJDK 11)..."
+      - wget -qO - https://corretto.aws/corretto.key | sudo apt-key add -
+      - sudo add-apt-repository "deb https://corretto.aws/debian stable main"
+      - sudo apt-get update
+      - sudo apt-get install -y java-11-amazon-corretto-jdk
+      - java -version  # Verify the installed Java version
       - echo "Installation phase completed."
 
- 
+  # Build phase
   build:
     commands:
       - echo "Starting the build process..."
-      - mvn clean package -DskipTests
+      - mvn clean package -DskipTests  # You can remove -DskipTests to run tests
       - echo "Build completed successfully."
 
+  # Post build phase (optional)
+  post_build:
+    commands:
+      - echo "Post-build phase started..."
+      - echo "Post-build phase completed."
 
 artifacts:
   files:
-    - target/*.jar
+    - target/*.jar   # Specify your artifact location (e.g., JAR files)
+  discard-paths: yes   # Discards directory paths when storing artifacts
 
+# Cache (optional)
 cache:
   paths:
-    - '/root/.m2/**/*'
+    - '/root/.m2/**/*'  # Caches Maven dependencies to speed up builds
