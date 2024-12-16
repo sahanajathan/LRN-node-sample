@@ -46,5 +46,5 @@ RUN ./snyk monitor
 # EXPOSE 8080  # Uncomment if the application runs on a specific port
 
 # Optionally, you can define the default command to run your app (e.g., if it's a web app, REST API, etc.)
-# CMD ["java", "-jar", "target/your-app.jar"]  # Adjust as necessary for your app
+# CMD ["java", "-jar", "target/your-app.jar"]  # Adjust as necessary for your app 
 
