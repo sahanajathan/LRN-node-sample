@@ -9,6 +9,6 @@
   "author": "buraku",
   "license": "MIT-0",
   "dependencies": {
-    "express": "2.5.11"
+    "express": "4.21.2"
   }
 }
