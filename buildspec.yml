@@ -21,6 +21,7 @@ phases:
   post_build:
     commands:
       - echo "Build phase completed."
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 843835551300.dkr.ecr.us-east-1.amazonaws.com
       # Optionally push the Docker image to ECR after a successful build
       - docker push 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
 
