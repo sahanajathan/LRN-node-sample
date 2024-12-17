@@ -7,6 +7,8 @@ EXPOSE 3000
 CMD [ "node", "app.js" ]
 
 
+
+
 # Use official Node.js image with amd64 support
 FROM --platform=linux/amd64 node:alpine
 
@@ -28,6 +30,8 @@ COPY . .
 # Install dependencies for Node.js
 RUN npm install
 
+
+WORKDIR /usr/src/calc/java_project  # Set to the directory where pom.xml is located
 # Package the application (Assuming a Maven-based project)
 RUN mvn package -Dmaven.test.skip=true
 
