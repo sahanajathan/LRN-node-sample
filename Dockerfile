@@ -35,6 +35,10 @@ WORKDIR /usr/src/calc/java_project  # Set to the directory where pom.xml is loca
 # Package the application (Assuming a Maven-based project)
 RUN mvn  -X package -Dmaven.test.skip=true
 
+
+RUN ls -la /usr/src/calc/java_project
+
+
 # Expose the required port
 EXPOSE 3000
 
