@@ -11,7 +11,7 @@
 # Use official Node.js image with amd64 support
 FROM --platform=linux/amd64 node:alpine
 
-USER root
+
 
 #~~~~~~~SNYK Variable~~~~~~~~~~~~
 # Declare Snyktoken as a build-arg
@@ -32,14 +32,13 @@ WORKDIR /usr/src/calc
 
 COPY . .
 RUN npm install
+RUN npm install snyk -g
 
-# Install and run SNYK for security testing
-RUN curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
-RUN chmod -R +x ./snyk
+
 
 # Set the SNYK_AUTH_TOKEN in environment variable (ensure this is passed at runtime)
-RUN ./snyk test --severity-threshold=medium
-RUN ./snyk monitor
+RUN snyk test --severity-threshold=medium
+RUN snyk monitor
 
 # Expose the required port
 EXPOSE 3000
