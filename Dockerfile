@@ -37,6 +37,7 @@ RUN mvn  -X package -Dmaven.test.skip=true
 
 
 RUN ls -la /usr/src/calc/java_project
+COPY pom.xml /usr/src/calc/java_project/
 
 
 # Expose the required port
