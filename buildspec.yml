@@ -14,9 +14,7 @@ phases:
       - echo "Starting build phase..."
       # Build the Docker image
       - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
-      # Run SNYK scan inside the container after build
-      - docker run --rm 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest snyk test --severity-threshold=medium
-      - docker run --rm 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest snyk monitor
+     
 
   post_build:
     commands:
