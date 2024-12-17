@@ -11,7 +11,7 @@
 # Use official Node.js image with amd64 support
 FROM --platform=linux/amd64 node:alpine
 
-
+USER root
 
 #~~~~~~~SNYK Variable~~~~~~~~~~~~
 # Declare Snyktoken as a build-arg
