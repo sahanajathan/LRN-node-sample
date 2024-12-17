@@ -3,12 +3,22 @@ version: 0.2
 phases:
   pre_build:
     commands:
-
       - PWDUTILS=$(pwd)
       - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
       - chmod -R +x ./snyk
- build:
-    commands:
-      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
 
-      
+  build:
+    commands:
+      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
+
+  post_build:
+    commands:
+      - echo "Build phase completed."
+
+artifacts:
+  files:
+    - target/*.jar  # Adjust if you have build artifacts to be collected
+
+cache:
+  paths:
+    - '/root/.m2/**/*'  # Cache Maven dependencies, if applicable
