@@ -6,7 +6,7 @@ phases:
       - echo "Starting pre_build phase..."
       - PWDUTILS=$(pwd)
       # Download and prepare SNYK CLI for security scanning
-      - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
+      - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.996.0/snyk-linux"
       - chmod -R +x ./snyk
 
   build:
@@ -14,9 +14,9 @@ phases:
       - echo "Starting build phase..."
       # Build the Docker image
       - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
-      - $PWDUTILS/snyk auth $SNYK_AUTH_TOKEN
-      - $PWDUTILS/snyk test --docker 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
-      - $PWDUTILS/snyk monitor --docker 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
+      - ./snyk auth $SNYK_AUTH_TOKEN
+      - ./snyk test --docker 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
+      - ./snyk monitor --docker 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
    
 
   post_build:
