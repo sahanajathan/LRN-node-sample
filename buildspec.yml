@@ -3,22 +3,32 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo "Starting pre_build phase..."
       - PWDUTILS=$(pwd)
+      # Download and prepare SNYK CLI for security scanning
       - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
       - chmod -R +x ./snyk
 
   build:
     commands:
+      - echo "Starting build phase..."
+      # Build the Docker image
       - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
+      # Run SNYK scan inside the container after build
+      - docker run --rm 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest snyk test --severity-threshold=medium
+      - docker run --rm 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest snyk monitor
 
   post_build:
     commands:
       - echo "Build phase completed."
+      # Optionally push the Docker image to ECR after a successful build
+      - docker push 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
 
 artifacts:
   files:
     - target/*.jar  # Adjust if you have build artifacts to be collected
+  discard-paths: yes  # Optional, to avoid including unnecessary directories
 
 cache:
   paths:
-    - '/root/.m2/**/*'  # Cache Maven dependencies, if applicable
+    - '/root/.m2/**/*'  # Cache Maven dependencies if you're using Maven during the Docker build
