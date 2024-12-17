@@ -11,6 +11,17 @@
 # Use official Node.js image with amd64 support
 FROM --platform=linux/amd64 node:alpine
 
+
+
+#~~~~~~~SNYK Variable~~~~~~~~~~~~
+# Declare Snyktoken as a build-arg
+ARG snyk_auth_token
+# Set the SNYK_TOKEN environment variable
+ENV SNYK_TOKEN=${snyk_auth_token}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 # Install Maven dependencies (Alpine-based images need these packages)
 RUN apk add --no-cache \
     bash \
