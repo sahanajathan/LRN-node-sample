@@ -22,11 +22,11 @@ ENV SNYK_TOKEN=${snyk_auth_token}
 
 
 
-# Install Maven dependencies (Alpine-based images need these packages)
+
 RUN apk add --no-cache \
     bash \
     curl \
-    git \
+    git 
     
 # Create and set working directory
 RUN mkdir -p /usr/src/calc
