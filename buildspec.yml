@@ -30,6 +30,4 @@ artifacts:
     - target/*.jar  # Adjust if you have build artifacts to be collected
   discard-paths: yes  # Optional, to avoid including unnecessary directories
 
-cache:
-  paths:
-    - '/root/.m2/**/*'  # Cache Maven dependencies if you're using Maven during the Docker build
+
