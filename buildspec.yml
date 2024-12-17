@@ -14,6 +14,10 @@ phases:
       - echo "Starting build phase..."
       # Build the Docker image
       - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
+      - $PWDUTILS/snyk auth $SNYK_AUTH_TOKEN
+      - $PWDUTILS/snyk test --docker $REPOSITORY_URI:latest
+      - $PWDUTILS/snyk monitor --docker $REPOSITORY_URI:latest
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:latest
      
 
   post_build:
