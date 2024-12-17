@@ -21,8 +21,6 @@ ENV SNYK_TOKEN=${snyk_auth_token}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
-
 RUN apk add --no-cache \
     bash \
     curl \
