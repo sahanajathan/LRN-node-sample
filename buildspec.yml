@@ -1,40 +1,14 @@
 version: 0.2
 
 phases:
-  # Install phase
-  install:
+  pre_build:
     commands:
-      - echo "Installing Amazon Corretto (OpenJDK 11)..."
-      # Download the Corretto GPG key and add it to trusted keys
-      - wget -qO - https://corretto.aws/corretto.key | sudo tee /etc/apt/trusted.gpg.d/corretto.asc
-      # Add the Corretto repository to the sources list
-      - sudo add-apt-repository "deb https://corretto.aws/debian stable main"
-      - sudo apt-get update
-      # Install Amazon Corretto OpenJDK 11
-      - sudo apt-get install -y java-11-amazon-corretto-jdk
-      # Verify installation
-      - java -version
-      - echo "Installation phase completed."
 
-  # Build phase
-  build:
+      - PWDUTILS=$(pwd)
+      - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
+      - chmod -R +x ./snyk
+ build:
     commands:
-      - echo "Starting the build process..."
-      - mvn clean package -DskipTests  # Adjust according to your build process
-      - echo "Build completed successfully."
+      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
 
-  # Post build phase (optional)
-  post_build:
-    commands:
-      - echo "Post-build phase started..."
-      - echo "Post-build phase completed."
-
-artifacts:
-  files:
-    - target/*.jar  # Specify your artifact location (e.g., JAR files)
-  discard-paths: yes   # Discards directory paths when storing artifacts
-
-# Cache (optional)
-cache:
-  paths:
-    - '/root/.m2/**/*'  # Caches Maven dependencies to speed up builds
+      
