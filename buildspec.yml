@@ -21,7 +21,11 @@ phases:
       - export ECR_REPOSITORY_URI=843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2
       - echo "[{\"name\":\"LRN-App\",\"imageUri\":\"843835551300.dkr.ecr.us-east-1.amazonaws.com:lrn_demo2:latest\"}]" > imagedefinitions.json
       - cat imagedefinitions.json
+      - echo "Creating AppSpec file..."
+      - cp ./AppSpec.yml /tmp/AppSpec.yml  # Ensure this is in your build artifact
+
 
 artifacts:
   files:
     - imagedefinitions.json
+    - /tmp/AppSpec.yml  
