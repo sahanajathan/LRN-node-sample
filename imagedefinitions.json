@@ -1,0 +1,6 @@
+[
+  {
+    "name": "LRN-App", 
+    "imageUri": "843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest"
+  }
+]
