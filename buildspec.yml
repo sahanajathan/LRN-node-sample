@@ -19,7 +19,7 @@ phases:
       - docker push 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
       # Set the ECR repository URI here
       - export ECR_REPOSITORY_URI=843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2
-      - echo "[{\"name\":\"LRN-Deploy-to-ECS-TD\",\"imageUri\":\"$ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION\"}]" > imagedefinitions.json
+      - echo "[{\"name\":\"LRN-App\",\"imageUri\":\"$ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION\"}]" > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
