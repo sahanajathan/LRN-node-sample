@@ -1,0 +1,7 @@
+version: 0.0
+resources:
+  - ecs:
+      taskDefinition: arn:aws:ecs:us-east-1:843835551300:task-definition/LRN-Deploy-to-ECS-TD:1
+      service: LRN_Demo_ECS-Service        # The ECS Service to deploy the task to
+      clusterName:LRN_Demo_ECS
+      deploymentController: CODE_DEPLOY    # Deployment controller type (CodeDeploy)
