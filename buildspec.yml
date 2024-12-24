@@ -19,6 +19,4 @@ phases:
       - docker push  843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
       - echo "[{\"name\":\"LRN_Demo_ECS\",\"imageUri\":\"$ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION\"}]" > imagedefinitions.json
 
-  artifacts:
-   files:
-     - imagedefinitions.json
+  
