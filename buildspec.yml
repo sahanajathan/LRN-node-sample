@@ -20,6 +20,7 @@ phases:
       # Set the ECR repository URI here
       - export ECR_REPOSITORY_URI=843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2
       - echo "[{\"name\":\"LRN_Demo_ECS\",\"imageUri\":\"$ECR_REPOSITORY_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION\"}]" > imagedefinitions.json
+      - cat imagedefinitions.json
 
 artifacts:
   files:
