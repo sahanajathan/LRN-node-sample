@@ -1,0 +1,6 @@
+resources:
+  - ecs:
+      taskDefinition: arn:aws:ecs:us-east-1:312410384012:task-definition/lrn-prd:1
+      service: service1        # The ECS Service to deploy the task to
+      clusterName:lrn-prod
+      deploymentController: CODE_DEPLOY    # Deployment controller type (CodeDeploy)
