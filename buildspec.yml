@@ -10,14 +10,14 @@ phases:
   build:
     commands:
       - echo "Starting build phase..."
-      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
+      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest .
 
   post_build:
     commands:
       - echo "Build phase completed."
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 843835551300.dkr.ecr.us-east-1.amazonaws.com
-      - docker push 843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com
+      - docker push <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2:latest
       # Set the ECR repository URI here
-      - export ECR_REPOSITORY_URI=843835551300.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2
+      - export ECR_REPOSITORY_URI=<aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/lrn_demo2
       
    
